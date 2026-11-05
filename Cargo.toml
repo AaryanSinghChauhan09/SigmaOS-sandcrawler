@@ -1,0 +1,8 @@
+[package]
+name = "sigmaos-sandcrawler"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Upstream release/version crawler — SigmaOS component inspired by Arch Linux infrastructure."
+
+[dependencies]
