@@ -7,14 +7,14 @@ use std::fmt;
 
 /// Errors produced by this component. Fail-fast: errors are returned, not panicked.
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub enum Sigmaos_sandcrawlerError {
+pub enum SandcrawlerError {
     /// The requested operation is not valid in the current state.
     InvalidState,
     /// Input failed validation.
     InvalidInput(String),
 }
 
-impl fmt::Display for Sigmaos_sandcrawlerError {
+impl fmt::Display for SandcrawlerError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::InvalidState => write!(f, "invalid state"),
@@ -23,20 +23,20 @@ impl fmt::Display for Sigmaos_sandcrawlerError {
     }
 }
 
-impl std::error::Error for Sigmaos_sandcrawlerError {}
+impl std::error::Error for SandcrawlerError {}
 
 /// Core component type. Holds configuration; performs no I/O by default.
 #[derive(Debug, Clone, Default)]
-pub struct Sigmaos_sandcrawler {
+pub struct Sandcrawler {
     name: String,
 }
 
-impl Sigmaos_sandcrawler {
+impl Sandcrawler {
     /// Create a new component instance. Fails fast on empty names.
-    pub fn new(name: impl Into<String>) -> Result<Self, Sigmaos_sandcrawlerError> {
+    pub fn new(name: impl Into<String>) -> Result<Self, SandcrawlerError> {
         let name = name.into();
         if name.trim().is_empty() {
-            return Err(Sigmaos_sandcrawlerError::InvalidInput("name must not be empty".into()));
+            return Err(SandcrawlerError::InvalidInput("name must not be empty".into()));
         }
         Ok(Self { name })
     }
@@ -47,9 +47,9 @@ impl Sigmaos_sandcrawler {
     }
 
     /// Perform the component's primary action. Returns a deterministic result.
-    pub fn run(&self) -> Result<String, Sigmaos_sandcrawlerError> {
+    pub fn run(&self) -> Result<String, SandcrawlerError> {
         if self.name.is_empty() {
-            return Err(Sigmaos_sandcrawlerError::InvalidState);
+            return Err(SandcrawlerError::InvalidState);
         }
         Ok(format!("{}: ok", self.name))
     }
@@ -62,18 +62,18 @@ mod tests {
     #[test]
     fn new_rejects_empty_name() {
         // Arrange / Act / Assert
-        assert!(matches!(Sigmaos_sandcrawler::new("  "), Err(Sigmaos_sandcrawlerError::InvalidInput(_))));
+        assert!(matches!(Sandcrawler::new("  "), Err(SandcrawlerError::InvalidInput(_))));
     }
 
     #[test]
     fn run_returns_deterministic_result() {
-        let c = Sigmaos_sandcrawler::new("test").unwrap();
+        let c = Sandcrawler::new("test").unwrap();
         assert_eq!(c.run().unwrap(), "test: ok");
     }
 
     #[test]
     fn name_is_accessible() {
-        let c = Sigmaos_sandcrawler::new("abc").unwrap();
+        let c = Sandcrawler::new("abc").unwrap();
         assert_eq!(c.name(), "abc");
     }
 }
