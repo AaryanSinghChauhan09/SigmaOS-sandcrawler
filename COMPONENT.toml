@@ -3,7 +3,7 @@ name = "SigmaOS-sandcrawler"
 tier = 2
 stability = "scaffold"
 language = "rust"
-description = "sandcrawler component"
+description = "SigmaOS sandcrawler component (Arch Linux inspired)"
 upstream = []
 
 [contract]
