@@ -1,8 +1,15 @@
 [package]
-name = "sigmaos-sandcrawler"
+name = "SigmaOS-sandcrawler"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
-description = "Upstream release/version crawler — SigmaOS component inspired by Arch Linux infrastructure."
+license = "Apache-2.0"
+description = "SigmaOS sandcrawler component"
+
+[lib]
+name = "sandcrawler"
+path = "src/lib.rs"
 
 [dependencies]
+thiserror = "1"
+
+[dev-dependencies]
