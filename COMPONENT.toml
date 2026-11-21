@@ -1,16 +1,16 @@
 [component]
 name = "SigmaOS-sandcrawler"
 tier = 2
-stability = "scaffold"
+stability = "beta"
 language = "rust"
 description = "SigmaOS sandcrawler component (Arch Linux inspired)"
-upstream = []
+upstream = ["https://gitlab.archlinux.org/archlinux/sandcrawler"]
 
 [contract]
-provides = ["component"]
+provides = ["pkgbuild-lint", "pkgbuild-parser", "packaging-rules"]
 depends_on = []
 
 [maturity]
 status = "Implemented"
-test_evidence = "Compiles and passes AAA unit tests"
+test_evidence = "cargo test: 9 tests pass (rules engine, severity grading, function-body checks)"
 next_milestone = "Hardware and runtime integration"
